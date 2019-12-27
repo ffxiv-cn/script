@@ -46,7 +46,9 @@
       if (!_.isUndefined(ffxivcn.translate[tmpKey])) {
         return ffxivcn.translate[tmpKey] + ':';
       }
-    } else if (reg1.test(key)) {
+    }
+    //这里应对 直击 +60之类的形式
+    else if (reg1.test(key)) {
       var match = reg1.exec(key);
       if (!_.isUndefined(ffxivcn.translate[match[1]])) {
         return ffxivcn.translate[match[1]] + match[2];

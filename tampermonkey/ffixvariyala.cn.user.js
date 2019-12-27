@@ -18,21 +18,51 @@
 
   var defaultDomSelects = [
     'td.itemName>div>a',// 表格装备名
-    'td.attributeName'
+    'td.attributeName',
+    'td.attributeNameRight',
+    'option'
   ];
 
+  /**
+   * 翻译字段
+   * @param {String} key 
+   */
   function l(key) {
-    if (_.isUndefined(ffxivcn.translate[key])) {
-      return key;
+    /**
+     * .exec('"Direct Hit Rate +20"')
+     * 0: ""Direct Hit Rate +20"
+     * 1: ""Direct Hit Rate"
+     * 2: " +20"
+     */
+    var reg1 = /^(.*)( \+\d+)/i;
+
+    if (!_.isUndefined(ffxivcn.translate[key])) {
+      // 运气好直接命中了
+      return ffxivcn.translate[key];
+    }
+    // 下面开始xjb分词了
+    else if (_.endsWith(key, ':')) {
+      var tmpKey = key.slice(0, key.length - 1);
+      if (!_.isUndefined(ffxivcn.translate[tmpKey])) {
+        return ffxivcn.translate[tmpKey] + ':';
+      }
+    } else if (reg1.test(key)) {
+      var match = reg1.exec(key);
+      if (!_.isUndefined(ffxivcn.translate[match[1]])) {
+        return ffxivcn.translate[match[1]] + match[2];
+      }
     }
 
-    return ffxivcn.translate[key];
+    return key;
   }
 
   function translate() {
     _.each(defaultDomSelects, function (domSelect) {
       $(domSelect).each(function () {
-        $(this).text(l($(this).text()));
+        var key = $(this).text();
+        if (_.isString(key)) {
+          $(this).text(l(key));
+        }
       })
     })
   }

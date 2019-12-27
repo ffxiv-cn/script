@@ -8,11 +8,12 @@
 // @grant        none
 // @require      https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js
 // @require      https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js
+// @require      https://cdn.jsdelivr.net/gh/ffxiv-cn/script@master/data/translate.js
 // ==/UserScript==
 
 (function () {
   'use strict';
-
+  console.log(ffxivcn);
   // Your code here...
 })();
 

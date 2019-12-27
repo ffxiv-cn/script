@@ -31,7 +31,7 @@
   function translate() {
     _.each(defaultDomSelects, function (domSelect) {
       $(domSelect).each(function () {
-        this.text(l(this.text));
+        $(this).text(l($(this).text()));
       })
     })
   }

@@ -1,6 +1,7 @@
-(function (ffxivcn) {
+(function () {
   'use strict';
-  ffxivcn = {
+  window.ffxivcn = window.ffxivcn || {};
+  window.ffxivcn.translate = {
     "Strength": "力量",
     "Dexterity": "灵巧",
     "Vitality": "耐力",
@@ -810,7 +811,4 @@
     "Immaculate Ring of Healing": "无瑕治愈指环",
     "Immaculate Ring of Casting": "无瑕咏咒指环"
   }
-})(window.ffxivcn);
-
-
-
+})();

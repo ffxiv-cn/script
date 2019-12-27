@@ -2,7 +2,7 @@
 // @name         ffixv ariyala中文化脚本
 // @namespace    https://www.neppure.vip/
 // @version      0.1.0
-// @description  https://github.com/ffxiv-cn/script/tampermonkey/ffixvariyala.cn.user.js
+// @description  https://github.com/ffxiv-cn/script/
 // @author       野原小牛
 // @match        https://ffxiv.ariyala.com/*
 // @grant        none
@@ -17,7 +17,8 @@
   window.ffxivcn = window.ffxivcn || {};
 
   var defaultDomSelects = [
-    'td.itemName>div>a'// 表格装备名
+    'td.itemName>div>a',// 表格装备名
+    'td.attributeName'
   ];
 
   function l(key) {
@@ -37,5 +38,15 @@
   }
 
   window.ffxivcn.doTranslate = translate;
+
+  //dom变化就触发一次翻译
+  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+  var observer = new MutationObserver(function (mutations, observer) {
+    window.ffxivcn.doTranslate();
+  });
+  observer.observe(document, {
+    subtree: true,
+    attributes: true
+  });
 })();
 

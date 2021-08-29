@@ -100,12 +100,13 @@
     }
 
 
-    $.getJSON('https://actff1.web.sdo.com/20190315Zhaodai/Server/User.ashx?method=getaward3&bindid=' + tar.Id, function(result) {
+    $.post('https://actff1.web.sdo.com/20190315Zhaodai/Server/User.ashx',{ method: "getaward1",bindid: tar.Id }, function(result) {
       nbb.times++;
       nbb.info("领取"+tar.PtAccount+"成功,次数="+ nbb.times);
       setTimeout(function() {
         nbb.getAward(index + 1);
       }, 3000)
+
     })
   }
 
